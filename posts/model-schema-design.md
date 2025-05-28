@@ -1,5 +1,7 @@
 # 📝 How Should the Relationship Between Models and Schemas Be Managed?
 
+When building APIs, managing the relationship between models and schemas can get messy fast. This post breaks down the main approaches you can take. By the end, you'll know which pattern keeps things clean, consistent, and scalable.
+
 ## 📢 Attention! This post is co-authored by GPT-4o from OpenAI.
 
 ### 🔰 Definitions
@@ -42,7 +44,7 @@ In this approach, you consider the **model as the "source of truth"**, and build
 * You inherit **more than you want**:
 
   * Fields like `_id` (MongoDB/Beanie), `created_at`, `updated_at`, `password_hash`, etc., are included unless explicitly removed.
-* Schemas may inherit **behavioral methods** or internal database config that has nothing to do with external API communication.
+* Schemas may inherit **behavioral methods** or internal database config unrelated to API communication.
 * You risk **exposing sensitive fields** unless you're meticulous with `exclude` and `include` flags.
 
 **Examples of such fields**:
@@ -50,6 +52,40 @@ In this approach, you consider the **model as the "source of truth"**, and build
 * `_id`: Beanie or MongoDB document identifier
 * `created_at`, `updated_at`: Timestamps meant for internal use
 * `user_id`, `password_hash`: Sensitive or relational internals
+
+#### 🧪 Code Example
+
+```python
+# models.py
+class Log(Document):
+    uid: str = Field(default_factory=lambda: str(uuid4()))
+    user: str
+    tenant: str | None = None
+    log: dict | str = Field(default_factory=dict)
+    metadata: dict = Field(default_factory=dict)
+    tag: str | None = None
+    level: Level = Level.NOTSET
+    created_at: datetime = Field(default_factory=datetime.now)
+
+    class Settings:
+        name = "logs"
+```
+
+```python
+# schemas.py
+class LogRetrieveSchema(Log):
+    class Config:
+        from_attributes = True
+        fields = {
+            "_id": {"exclude": True},
+            "created_at": {"exclude": False},
+        }
+```
+
+👎 **Issues**:
+
+* You have to **exclude `_id` manually**
+* Schema includes `insert`, `save`, and other `Document` methods — unnecessary for API payloads
 
 ---
 
@@ -68,11 +104,46 @@ This flips the direction: schemas are the "core" representations, and models inh
 2. Models are tightly coupled to schema structure — **a schema change might force unexpected model changes**.
 3. It conflicts with some ORM/ODM expectations, which want models to define structure top-down.
 
+#### 🧪 Code Example
+
+```python
+# schemas.py
+class BaseSchema(BaseModel):
+    tenant: str | None = None
+    log: dict | str = Field(default_factory=dict)
+    metadata: dict = Field(default_factory=dict)
+    tag: str | None = None
+    level: Level = Level.NOTSET
+
+
+class LogCreateSchema(BaseSchema):
+    pass
+
+
+class LogRetrieveSchema(BaseSchema):
+    uid: str
+    created_at: datetime
+```
+
+```python
+# models.py
+class Log(Document, LogCreateSchema):
+    uid: str = Field(default_factory=lambda: str(uuid4()))
+    user: str
+    created_at: datetime = Field(default_factory=datetime.now)
+
+    class Settings:
+        name = "logs"
+```
+
+👎 **Problems**:
+
+* `LogCreateSchema` was never meant to be reused like this
+* Changes to schemas for API purposes may unintentionally affect your model’s DB logic
+
 ---
 
 ## 🧩 My Preferred Approach: Shared Abstract Base
-
-To strike a balance between reuse and separation of concerns:
 
 ### 🌟 Solution: Define a Shared Base Model
 
@@ -81,13 +152,10 @@ To strike a balance between reuse and separation of concerns:
 3. Add model-specific fields (like `_id`, `created_at`) in your `Document` class.
 4. Add schema-specific fields (e.g., computed fields, serialization tweaks) in schema subclasses.
 
----
-
-## ✅ Code: Preferred Design (Shared Base Class)
-
-### `models.py`
+#### 🧪 Code Example
 
 ```python
+# models.py
 from beanie import Document
 from pydantic import BaseModel, Field
 from enum import Enum
@@ -123,9 +191,8 @@ class Log(Document, BaseLog):
         name = "logs"
 ```
 
-### `schemas.py`
-
 ```python
+# schemas.py
 from datetime import datetime
 from models import BaseLog
 
@@ -147,90 +214,14 @@ class LogRetrieveSchema(BaseLog):
 
 ---
 
-## 🔄 Alternative #1: Models as Source of Truth
+## 🧠 Final Thoughts — **The Final Takeaway**
 
-```python
-# models.py
-class Log(Document):
-    uid: str = Field(default_factory=lambda: str(uuid4()))
-    user: str
-    tenant: str | None = None
-    log: dict | str = Field(default_factory=dict)
-    metadata: dict = Field(default_factory=dict)
-    tag: str | None = None
-    level: Level = Level.NOTSET
-    created_at: datetime = Field(default_factory=datetime.now)
+While each approach has pros and cons, **I strongly recommend the “Shared Abstract Base” approach as the cleanest and most maintainable solution**. This method balances:
 
-    class Settings:
-        name = "logs"
-```
+* Reuse of shared field definitions without duplications
+* Separation of concerns between internal database logic and external API schema
+* Avoidance of unintended exposure of sensitive fields or unwanted methods
 
-```python
-# schemas.py
-class LogRetrieveSchema(Log):
-    class Config:
-        from_attributes = True
-        fields = {
-            "_id": {"exclude": True},
-            "created_at": {"exclude": False},
-        }
-```
+If you want a single, practical pattern that scales well in real projects — this is the one I use and advocate for.
 
-👎 **Issues**:
-
-* You have to **exclude \_id manually**
-* Schema includes `insert`, `save`, and other `Document` methods — unnecessary for API payloads
-
----
-
-## 🔁 Alternative #2: Schema as Source of Truth
-
-```python
-# schemas.py
-class BaseSchema(BaseModel):
-    tenant: str | None = None
-    log: dict | str = Field(default_factory=dict)
-    metadata: dict = Field(default_factory=dict)
-    tag: str | None = None
-    level: Level = Level.NOTSET
-
-
-class LogCreateSchema(BaseSchema):
-    pass
-
-
-class LogRetrieveSchema(BaseSchema):
-    uid: str
-    created_at: datetime
-```
-
-```python
-# models.py
-class Log(Document, LogCreateSchema):
-    uid: str = Field(default_factory=lambda: str(uuid4()))
-    user: str
-    created_at: datetime = Field(default_factory=datetime.now)
-
-    class Settings:
-        name = "logs"
-```
----
-
-👎 **Problems**:
-
-* `LogCreateSchema` was never meant to be reused like this
-* Changes to schemas for API purposes may unintentionally affect your model’s DB logic
-
----
-
-## 🧠 Final Thoughts
-
-> Use inheritance **only when it provides clarity and eliminates duplication**. Otherwise, composition and explicit field definitions can be more maintainable.
-
-By defining a **shared abstract base**, you get:
-
-* **Explicit structure**
-* **Reduced duplication**
-* **Clear boundaries** between data layers
-
-This hybrid pattern lets you scale both your **business logic** and your **data model** cleanly.
+> **In summary: define a common abstract base with shared fields and have both your models and schemas inherit from it, adding their own specifics separately.**
