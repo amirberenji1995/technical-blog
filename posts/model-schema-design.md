@@ -216,7 +216,6 @@ class Log(Document, LogCreateSchema):
 ```
 ---
 
-Would you like me to format this as a publish-ready markdown file or turn it into a post-ready blog layout?
 👎 **Problems**:
 
 * `LogCreateSchema` was never meant to be reused like this
