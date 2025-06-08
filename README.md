@@ -16,6 +16,8 @@ The goal of this repository is to document and share ideas on building software 
 ### 3. [Should You Use Async or Sync in Your API Views?](posts/async-or-sync.md)
    Sync (view) or Async view, that is the question.
 
+### 4. []()
+
 **More coming soon!**
 
 ---
