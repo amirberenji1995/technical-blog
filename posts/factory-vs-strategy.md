@@ -97,7 +97,11 @@ This is where **design patterns** save the day.
 
 ## 🏭 2. The Factory Pattern (Alone)
 
-The Factory pattern improves organization by abstracting the creation of objects. But when overused or misapplied, it leads to pointless classes.
+The [Factory Pattern](https://realpython.com/factory-method-python/) is a creational design pattern that abstracts the process of object creation, allowing code to depend on interfaces rather than concrete implementations. It’s especially useful when the exact type of the object to create isn’t known until runtime.
+
+In our case, it helps organize message dispatchers by decoupling the selection logic from the actual send operation. However, when misapplied—especially in scenarios where the created classes do little or no work—it can lead to unnecessary boilerplate and an inflated class hierarchy.
+
+The result is code that’s technically “organized,” but not meaningfully improved.
 
 ```python
 # factory_only.py
@@ -136,12 +140,12 @@ def send_message(message: Message):
 
 ```
 
-### 😐 Pros
+### 😎 Pros
 
 * ✅ Clean separation between creation and usage
 * ✅ Easier to extend with new channels
 
-### 😤 Cons
+### 😕 Cons
 
 * ❌ Each class is just a glorified wrapper around a `print()` statement
 * ❌ Overengineering — too much boilerplate for trivial behavior
@@ -151,9 +155,10 @@ def send_message(message: Message):
 
 ## 🧠 3. The Strategy Pattern (Alone)
 
-The Strategy pattern lets you dynamically select logic (a strategy) based on a condition — perfect when behavior varies but the interface is stable.
+The Strategy Pattern is a behavioral design pattern that enables selecting an algorithm or behavior at runtime based on context, while maintaining a consistent interface. It’s ideal when you have multiple interchangeable behaviors that can vary independently from the clients using them.
 
-Here, we drop the factory and instead build a mapping from `ChannelType` to handler functions.
+In this approach, instead of constructing objects through a factory, we map each `ChannelType` to a corresponding handler function. This keeps logic selection clean and avoids overengineering with classes that do little. However, without a clear boundary around object creation, the strategy can sometimes miss opportunities for future extensibility.
+
 
 ```python
 # strategy_only.py
@@ -239,7 +244,7 @@ class MessageHandler:
         self.message.sent_at = datetime.now()
 ```
 
-### 🧠 What Makes This Better?
+### 🧠 What makes it the best?
 
 * ✅ Minimalist but structured
 * ✅ Strategy: logic is swappable and testable
@@ -275,7 +280,3 @@ So what's the sweet spot?
 As your system grows to support more channels, more message types, or more complex logic per channel, this pattern allows you to plug in new behavior with minimal disruption. That’s not just good architecture — it’s sustainable development.
 
 > Design patterns are tools, not rules. Use them intentionally, and your code will thank you later.
-
----
-
-Let me know if you'd like a shorter version for a tweet, post summary, or newsletter excerpt.
