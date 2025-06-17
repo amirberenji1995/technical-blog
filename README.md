@@ -18,6 +18,10 @@ The goal of this repository is to document and share ideas on building software 
 
 ### 4. [Single application with simulaneous multiple database support - Repository Design Pattern](posts/multiple-db-support.md)
    Bring **decoupling** and **swappability** to your data layers.
+
+### 5. [Factory vs Strategy in Python: Crafting Clean, Scalable Message Dispatchers](posts/factory-vs-strategy.md)
+   Factories decide what to send — strategies define how it’s done. Together, they keep your code elegant and extensible.
+
 **More coming soon!**
 
 ---
