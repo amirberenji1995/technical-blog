@@ -22,7 +22,11 @@ The goal of this repository is to document and share ideas on building software 
 ### 5. [Factory vs Strategy in Python: Crafting Clean, Scalable Message Dispatchers](posts/factory-vs-strategy.md)
    Factories decide what to send — strategies define how it’s done. Together, they keep your code elegant and extensible.
 
-**More coming soon!**
+### 6. [7 Shades of Cohesion: Learn to Make Your Code Do One Thing Well!](posts/cohesion.md)
+   From chaotic clumps to well fitting methods; cohesion defines how well a class holds itself together
+
+
+**More coming soon (hopefully)!**
 
 ---
 
