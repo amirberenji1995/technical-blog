@@ -25,6 +25,8 @@ The goal of this repository is to document and share ideas on building software 
 ### 6. [7 Shades of Cohesion: Learn to Make Your Code Do One Thing Well!](posts/cohesion.md)
    From chaotic clumps to well fitting methods; cohesion defines how well a class holds itself together
 
+### 7. [Opening the Pandora Box: Learn the software architecture characteristics](posts/characteristics.md)
+   Have the buzzwords demistify to shape your software correcly.
 
 **More coming soon (hopefully)!**
 
