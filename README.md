@@ -31,6 +31,9 @@ The goal of this repository is to document and share ideas on building software 
 ### 8. [Why Finite State Machines Matter in Real-World Software](posts/finite-state-machine.md)
    #### *Modeling complex workflows in backend systems using finite state machines for clarity, safety, and maintainability.*
 
+### 9. [Building Reusable Responses and Errors in FastAPI: A Scalable Pattern](posts/errors_and_responses.md)
+   #### *FastAPI can speak clearly; consistent responses and meaningful errors.*
+
 **More coming soon (hopefully)!**
 
 ---
