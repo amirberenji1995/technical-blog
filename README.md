@@ -34,6 +34,9 @@ The goal of this repository is to document and share ideas on building software 
 ### 9. [Building Reusable Responses and Errors in FastAPI: A Scalable Pattern](posts/errors_and_responses.md)
    #### *FastAPI can speak clearly; consistent responses and meaningful errors.*
 
+### 10. [Entities are Essential but Don't Get Trapped by Them](posts/entity-trap.md)
+   #### *Building Domain-Driven Models: Keep Entities Smart and Services Focused.*
+
 **More coming soon (hopefully)!**
 
 ---
