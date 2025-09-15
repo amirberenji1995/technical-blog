@@ -6,7 +6,7 @@ While there's no single universal standard for these characteristics—each orga
 
 -----
 
-## 📢 Attention\! This post is co-authored by Gemini 2.5 Flash from Google.
+#### 📢 Attention\! This post is co-authored by Gemini 2.5 Flash from Google.
 
 ### 🔰 Definitions
 

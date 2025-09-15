@@ -1,6 +1,6 @@
 # 📝 Why Finite State Machines Matter in Real-World Software
 
-## 📢 Attention! This post is co‑authored by GPT‑4o from OpenAI.
+#### 📢 Attention! This post is co‑authored by GPT‑4o from OpenAI.
 
 ---
 

@@ -2,7 +2,7 @@
 
 Choosing between synchronous and asynchronous views in APIs is more than just a technical preference — it impacts scalability, complexity, and performance. This post explores the trade-offs using FastAPI, but the patterns apply broadly across modern frameworks. If you're building APIs and unsure when async is worth it, this is your no-fluff, decision-ready guide.
 
-## 📢 Attention! This post is co-authored by GPT-4o from OpenAI.
+#### 📢 Attention! This post is co-authored by GPT-4o from OpenAI.
 
 ---
 

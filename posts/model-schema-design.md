@@ -2,7 +2,7 @@
 
 When building APIs, managing the relationship between models and schemas can get messy fast. This post breaks down the main approaches you can take. By the end, you'll know which pattern keeps things clean, consistent, and scalable.
 
-## 📢 Attention! This post is co-authored by GPT-4o from OpenAI.
+#### 📢 Attention! This post is co-authored by GPT-4o from OpenAI.
 
 ### 🔰 Definitions
 

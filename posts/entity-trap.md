@@ -9,7 +9,7 @@ This discussion offers:
 3. 🧬 Guidance on when to put logic inside entities vs. services
 4. 📦 Practical takeaways for API developers using MVC + services
 
-## 📢 Attention! This post is co-authored by GPT-5 from OpenAI.
+#### 📢 Attention! This post is co-authored by GPT-5 from OpenAI.
 
 ---
 

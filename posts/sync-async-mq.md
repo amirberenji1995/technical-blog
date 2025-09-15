@@ -6,7 +6,7 @@ In this post, we walk through three styles of making repeated HTTP calls and mea
 2. **Asynchronous** execution using `httpx`
 3. **Asynchronous** execution with **RabbitMQ** as a decoupled producer-consumer pipeline
 
-## 📢 Attention! This post is co-authored by GPT-4o from OpenAI.
+#### 📢 Attention! This post is co-authored by GPT-4o from OpenAI.
 
 ---
 

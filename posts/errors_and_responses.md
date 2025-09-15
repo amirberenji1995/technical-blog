@@ -7,7 +7,7 @@ In this post, we explore a powerful pattern for managing **responses** and **exc
 3. 🧬 Inheritance-based design for consistency and DRYness
 4. 📄 Tight coupling of errors with example payloads for API docs
 
-## 📢 Attention! This post is co-authored by GPT-4o from OpenAI.
+#### 📢 Attention! This post is co-authored by GPT-4o from OpenAI.
 
 ---
 

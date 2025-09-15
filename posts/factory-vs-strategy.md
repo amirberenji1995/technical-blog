@@ -10,7 +10,7 @@ This blog post walks through **four different implementations** of a message-sen
 
 This post is based on real-world backend design decisions — and will help you better understand when and how to apply each pattern.
 
-## 📢 Attention! This post is co-authored by GPT-4o from OpenAI.
+#### 📢 Attention! This post is co-authored by GPT-4o from OpenAI.
 
 ---
 

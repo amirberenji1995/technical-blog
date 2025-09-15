@@ -6,7 +6,7 @@ Writing clean code isn’t just about using the right syntax or tools — it’s
 
 In this post, we’ll walk through **seven classic levels of cohesion**, from worst to best, using a simple scenario. You'll see how code can *work* but still be fragile, unclear, or bloated — and how small structural changes can massively improve clarity, testability, and reuse.
 
-## 📢 Attention! This post is co-authored by GPT-4o from OpenAI.
+#### 📢 Attention! This post is co-authored by GPT-4o from OpenAI.
 ---
 
 ## 🚕 Scenario: Ride-Sharing Request Handling

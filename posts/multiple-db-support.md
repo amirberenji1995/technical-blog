@@ -2,7 +2,7 @@
 
 If you’ve ever wondered how to develop a backend service that seamlessly supports **different databases** — say, MongoDB and PostgreSQL — this post is for you. In this tutorial, we use the [Repository Design Pattern](https://www.geeksforgeeks.org/repository-design-pattern/) to create a **simple yet flexible FastAPI application** that can switch between databases with minimal effort.
 
-## 📢 Attention! This post is co-authored by GPT-4o from OpenAI.
+#### 📢 Attention! This post is co-authored by GPT-4o from OpenAI.
 
 ---
 

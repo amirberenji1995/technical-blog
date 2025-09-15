@@ -37,6 +37,9 @@ The goal of this repository is to document and share ideas on building software 
 ### 10. [Entities are Essential but Don't Get Trapped by Them](posts/entity-trap.md)
    #### *Building Domain-Driven Models: Keep Entities Smart and Services Focused.*
 
+### 11. [Rules Lost in the Sinkhole: How to Avoid Centralizing All Logic in One Layer](posts/sinkhole_problem.md)
+   #### *Rescue your domain; stop business rules from sinking away.*
+
 **More coming soon (hopefully)!**
 
 ---
