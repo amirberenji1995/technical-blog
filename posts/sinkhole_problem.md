@@ -1,6 +1,8 @@
 # 🕳️ Rules Lost in the Sinkhole: How to Avoid Centralizing All Logic in One Layer
 
-In this post, we explore the **sinkhole problem** in software development. This anti-pattern occurs when most of the important business logic sinks into a single layer (often services or controllers), leaving entities and schemas hollow. We’ll examine this in a FastAPI app, then demonstrate a cleaner design that distributes responsibility properly.
+In this post, we explore the **sinkhole problem** in software development. This anti-pattern occurs when most of the important business logic sinks into a single layer (often services or controllers), leaving entities and schemas hollow. We’ll examine this in a  case study that employs FastAPI as the development framework, then demonstrate a cleaner design that distributes responsibility properly.
+
+It is worth mentioning that in most cases, applications suffer from **sinkhole problem** due to immature entities that are examples of **entity trap**, themselves; checkout my previous post on the [entity trap](entity-trap.md).
 
 #### 📢 Attention! This post is co-authored by GPT-5 from OpenAI.
 
